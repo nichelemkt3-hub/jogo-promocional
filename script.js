@@ -1,22 +1,28 @@
 let tentativas = 3;
 
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("btnChutar");
+
+  btn.addEventListener("click", chutar);
+});
+
 function chutar() {
+  const resultado = document.getElementById("resultado");
+  const spanTentativas = document.getElementById("tentativas");
+
   if (tentativas <= 0) {
-    alert("Fim de jogo!");
+    resultado.innerText = "❌ Fim de jogo!";
     return;
   }
 
   tentativas--;
-  document.getElementById("tentativas").innerText = tentativas;
+  spanTentativas.innerText = tentativas;
 
   const ganhou = Math.random() < 0.3;
 
   if (ganhou) {
-    document.getElementById("resultado").innerText =
-      "GOOOOL! Você ganhou um cupom!";
+    resultado.innerText = "🎉 GOOOOL! Você ganhou um cupom!";
   } else {
-    document.getElementById("resultado").innerText =
-      "Defesa! Tente de novo.";
+    resultado.innerText = "🧤 Defesa! Tente novamente.";
   }
 }
-
