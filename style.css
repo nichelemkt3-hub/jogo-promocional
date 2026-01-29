@@ -44,28 +44,39 @@ body {
   );
 }
 
-/* GOLEIRO */
+/* GOLEIRO BONECO */
 .goleiro {
   position: absolute;
   bottom: 10px;
-  left: 100px;
-  width: 40px;
+  left: 110px;
+  width: 36px;
   height: 60px;
-  background: #e74c3c;
-  border-radius: 8px;
-  transition: left 0.4s ease;
+  background: #1abc9c;
+  border-radius: 10px 10px 5px 5px;
 }
 
-/* BOLA */
+.goleiro::before {
+  content: "";
+  position: absolute;
+  top: -18px;
+  left: 6px;
+  width: 24px;
+  height: 24px;
+  background: #f1c27d;
+  border-radius: 50%;
+}
+
+/* BOLA REAL */
 .bola {
   position: absolute;
   bottom: 35px;
   left: 50%;
   width: 22px;
   height: 22px;
-  background: radial-gradient(circle at 30% 30%, #fff, #ccc);
+  background: white;
   border-radius: 50%;
   transform: translateX(-50%);
+  box-shadow: inset -3px -3px 0 #ccc;
   transition: transform 0.7s ease-out;
 }
 
