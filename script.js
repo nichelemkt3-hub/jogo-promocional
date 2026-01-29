@@ -1,28 +1,32 @@
-let tentativas = 3;
+const bola = document.getElementById("bola");
+const goleiro = document.getElementById("goleiro");
+const resultado = document.getElementById("resultado");
+const btn = document.getElementById("btnChutar");
 
-document.addEventListener("DOMContentLoaded", () => {
-  const btn = document.getElementById("btnChutar");
-
-  btn.addEventListener("click", chutar);
-});
+btn.addEventListener("click", chutar);
 
 function chutar() {
-  const resultado = document.getElementById("resultado");
-  const spanTentativas = document.getElementById("tentativas");
+  resultado.innerText = "";
 
-  if (tentativas <= 0) {
-    resultado.innerText = "❌ Fim de jogo!";
-    return;
-  }
+  // reset
+  bola.className = "bola";
+  goleiro.style.left = "80px";
 
-  tentativas--;
-  spanTentativas.innerText = tentativas;
+  const direcao = Math.random();
 
-  const ganhou = Math.random() < 0.3;
-
-  if (ganhou) {
-    resultado.innerText = "🎉 GOOOOL! Você ganhou um cupom!";
-  } else {
-    resultado.innerText = "🧤 Defesa! Tente novamente.";
-  }
+  setTimeout(() => {
+    if (direcao < 0.33) {
+      bola.classList.add("chute-esq");
+      goleiro.style.left = "10px";
+      resultado.innerText = "🧤 Defesa!";
+    } else if (direcao < 0.66) {
+      bola.classList.add("chute-centro");
+      goleiro.style.left = "80px";
+      resultado.innerText = "🧤 Defesa!";
+    } else {
+      bola.classList.add("chute-dir");
+      goleiro.style.left = "150px";
+      resultado.innerText = "🎉 GOOOOL!";
+    }
+  }, 100);
 }
