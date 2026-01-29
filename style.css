@@ -98,3 +98,19 @@ button {
   background: #f1c40f;
   cursor: pointer;
 }
+
+.barra-forca {
+  width: 200px;
+  height: 12px;
+  background: #555;
+  margin: 15px auto;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.forca {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(to right, #2ecc71, #f1c40f, #e74c3c);
+  transition: width 0.03s;
+}
