@@ -10,20 +10,30 @@
 
 <h1>⚽ Chute Premiado</h1>
 
+<p>Tentativas: <span id="contador">3</span></p>
+
 <div class="campo">
   <div class="gol">
     <div class="goleiro" id="goleiro"></div>
   </div>
-
   <div class="bola" id="bola"></div>
 </div>
 
-<div class="barra-forca">
-  <div class="forca" id="forca"></div>
+<p id="resultado"></p>
+
+<!-- MODAL COMPRA -->
+<div class="modal" id="modalCompra">
+  <div class="modal-box">
+    <h2>🔥 Acabaram as tentativas</h2>
+    <p>Quer mais 3 chutes?</p>
+    <button onclick="comprar()">COMPRAR</button>
+  </div>
 </div>
 
-<button id="btnChutar">CHUTAR</button>
-<p id="resultado"></p>
+<!-- SONS -->
+<audio id="somChute" src="chute.mp3"></audio>
+<audio id="somGol" src="gol.mp3"></audio>
+<audio id="somDefesa" src="defesa.mp3"></audio>
 
 <script src="script.js"></script>
 </body>
