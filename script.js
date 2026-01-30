@@ -1,66 +1,30 @@
-const bola = document.getElementById("bola");
-const goleiro = document.getElementById("goleiro");
-const resultado = document.getElementById("resultado");
-const btn = document.getElementById("btnChutar");
-const barra = document.getElementById("forca");
+let startX = 0;
+let startY = 0;
+let endX = 0;
+let endY = 0;
 
-let forca = 0;
-let subindo = true;
-let intervalo;
-let jogando = false;
-
-/* BARRA OSCILANDO */
-function iniciarBarra() {
-  intervalo = setInterval(() => {
-    if (subindo) {
-      forca += 2;
-      if (forca >= 100) subindo = false;
-    } else {
-      forca -= 2;
-      if (forca <= 0) subindo = true;
-    }
-    barra.style.width = forca + "%";
-  }, 30);
-}
-
-iniciarBarra();
-
-/* BOTÃO */
-btn.addEventListener("click", () => {
-  if (jogando) return;
-  jogando = true;
-  clearInterval(intervalo);
-  chutar();
+bola.addEventListener("touchstart", e => {
+  const touch = e.touches[0];
+  startX = touch.clientX;
+  startY = touch.clientY;
 });
 
-function chutar() {
-  bola.style.transform = "translateX(-50%)";
+bola.addEventListener("touchend", e => {
+  const touch = e.changedTouches[0];
+  endX = touch.clientX;
+  endY = touch.clientY;
 
-  const direcao = Math.random();
+  processarSwipe();
+});
 
-  setTimeout(() => {
-    let altura = -200 - forca;
-    bola.style.transform = `translate(${direcao < 0.5 ? -80 : 80}px, ${altura}px)`;
+function processarSwipe() {
+  const dx = endX - startX;
+  const dy = startY - endY; // pra cima
 
-    goleiro.style.left = direcao < 0.5 ? "30px" : "190px";
+  if (dy < 50) return; // swipe fraco, ignora
 
-    if (forca > 40 && forca < 80 && direcao > 0.5) {
-      resultado.innerText = "⚽ GOOOOL!";
-    } else {
-      resultado.innerText = "🧤 DEFESA!";
-    }
+  let forca = Math.min(dy, 250);
+  let direcao = dx;
 
-    resetar();
-  }, 100);
-}
-
-function resetar() {
-  setTimeout(() => {
-    bola.style.transform = "translateX(-50%)";
-    goleiro.style.left = "110px";
-    forca = 0;
-    subindo = true;
-    jogando = false;
-    iniciarBarra();
-  }, 1200);
+  chutarSwipe(direcao, forca);
 }
